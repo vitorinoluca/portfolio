@@ -1,161 +1,172 @@
 import { motion } from 'motion/react';
-import { useEffect, useState, type ReactNode } from 'react';
+import {
+  ArrowDown,
+  BriefcaseBusiness,
+  Code2,
+  Database,
+  Mail,
+  MapPin,
+  Server,
+  TerminalSquare,
+} from 'lucide-react';
+import heroBg from '../assets/hero-bg.jpg';
 
-type DesktopWindowProps = {
-  title: string;
-  className?: string;
-  isDraggable: boolean;
-  children: ReactNode;
-};
+const stackItems = [
+  { label: 'Frontend', value: 'React, TypeScript, Tailwind', Icon: Code2 },
+  { label: 'Backend', value: 'Node, Express, APIs REST', Icon: Server },
+  { label: 'Datos', value: 'MongoDB, PostgreSQL, persistencia', Icon: Database },
+];
 
-function DesktopWindow({
-  title,
-  className = '',
-  isDraggable,
-  children,
-}: DesktopWindowProps) {
-  return (
-    <motion.article
-      drag={isDraggable}
-      dragMomentum={false}
-      whileDrag={{ scale: 1.02, zIndex: 30 }}
-      className={`overflow-hidden rounded-xl border border-white/10 bg-[#1e1e1e]/95 shadow-2xl backdrop-blur-sm md:absolute md:cursor-grab md:active:cursor-grabbing ${className}`}
-    >
-      <div className='flex items-center justify-between border-b border-white/5 bg-[#2d2d2d] px-4 py-2'>
-        <span className='font-mono text-xs text-white/55'>{title}</span>
-        <div className='flex gap-2' aria-hidden='true'>
-          <span className='h-2.5 w-2.5 rounded-full bg-[#ff5f56]' />
-          <span className='h-2.5 w-2.5 rounded-full bg-[#ffbd2e]' />
-          <span className='h-2.5 w-2.5 rounded-full bg-[#27c93f]' />
-        </div>
-      </div>
-      {children}
-    </motion.article>
-  );
-}
+const terminalLines = [
+  { prompt: '$', text: 'profile --summary' },
+  { prompt: '>', text: 'Fullstack developer en formacion constante.' },
+  { prompt: '>', text: 'Construyo interfaces claras y productos web mantenibles.' },
+  { prompt: '$', text: 'availability --status' },
+  { prompt: '>', text: 'Disponible para oportunidades IT y proyectos freelance.' },
+];
 
 export default function HeroDesktop() {
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia('(min-width: 768px)');
-    const updateIsDesktop = () => setIsDesktop(media.matches);
-
-    updateIsDesktop();
-    media.addEventListener('change', updateIsDesktop);
-
-    return () => media.removeEventListener('change', updateIsDesktop);
-  }, []);
-
   return (
-    <section className='relative z-10 flex min-h-dvh px-6 pt-16 md:h-dvh md:min-h-0 md:items-center'>
-      <div className='relative mx-auto flex w-full max-w-7xl flex-col gap-5 py-10 md:h-[calc(100dvh-4rem)] md:py-0'>
+    <section
+      id='hero'
+      className='relative z-10 min-h-dvh overflow-hidden px-6 pt-24 pb-10 md:px-8 lg:px-10'
+    >
+      <div
+        aria-hidden='true'
+        className='pointer-events-none absolute inset-0'
+        style={{
+          maskImage: 'linear-gradient(to bottom, black 0%, black 78%, transparent 100%)',
+          WebkitMaskImage:
+            'linear-gradient(to bottom, black 0%, black 78%, transparent 100%)',
+        }}
+      >
+        <div
+          style={{ backgroundImage: `url(${heroBg})` }}
+          className='absolute inset-0 bg-cover bg-center bg-no-repeat'
+        />
+        <div className='absolute inset-0 bg-black/78' />
+        <div className='absolute inset-0 bg-[linear-gradient(120deg,rgba(94,234,212,0.13),rgba(8,9,11,0.78)_45%,rgba(255,255,255,0.04))]' />
+        <div className='absolute inset-x-0 bottom-0 h-64 bg-[linear-gradient(to_bottom,transparent,var(--color-background))]' />
+      </div>
+
+      <div className='relative mx-auto grid min-h-[calc(100dvh-8.5rem)] w-full max-w-7xl min-w-0 items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]'>
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-          className='md:absolute md:left-0 md:top-[12%] md:w-[360px]'
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className='min-w-0 max-w-4xl'
         >
-          <p className='mb-3 font-mono text-sm text-white/45'>~/desktop</p>
-          <h1 className='max-w-xl text-5xl font-bold tracking-tight text-white md:text-7xl'>
-            Portfolio.exe
-          </h1>
-          <p className='mt-4 max-w-md font-mono text-sm leading-6 text-white/55'>
-            Un escritorio interactivo para descubrir como pienso, diseno y
-            construyo interfaces.
+          <div className='mb-7 flex flex-wrap items-center gap-2 font-mono text-xs text-white/70'>
+            <span className='inline-flex items-center gap-2 rounded-md border border-emerald-300/20 bg-emerald-400/[0.08] px-3 py-1.5 text-emerald-200'>
+              <span className='h-2 w-2 rounded-full bg-emerald-300' />
+              Disponible
+            </span>
+            <span className='inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-3 py-1.5'>
+              <MapPin className='h-3.5 w-3.5 text-cyan-300' />
+              La Plata, Argentina
+            </span>
+          </div>
+
+          <p className='mb-4 font-mono text-sm uppercase tracking-[0.18em] text-cyan-200/78'>
+            Fullstack Developer
           </p>
+          <h1 className='max-w-5xl text-5xl font-semibold leading-[1.02] tracking-normal text-white sm:text-6xl lg:text-7xl'>
+            Luca Valentin Vitorino
+          </h1>
+          <p className='mt-6 max-w-2xl text-lg leading-8 text-white/66 sm:text-xl'>
+            Desarrollo aplicaciones web con foco en interfaces limpias, logica clara y bases solidas para llevar ideas a produccion.
+          </p>
+
+          <div className='mt-9 flex flex-col gap-3 sm:flex-row'>
+            <a
+              href='#projects'
+              className='inline-flex items-center justify-center gap-2 rounded-md bg-white px-5 py-3 font-mono text-sm font-semibold text-black transition-colors hover:bg-cyan-100'
+            >
+              Ver proyectos
+              <ArrowDown className='h-4 w-4' />
+            </a>
+            <a
+              href='#contact'
+              className='inline-flex items-center justify-center gap-2 rounded-md border border-white/[0.12] bg-white/[0.04] px-5 py-3 font-mono text-sm font-semibold text-white/[0.86] transition-colors hover:border-cyan-300/35 hover:bg-cyan-400/10 hover:text-cyan-100'
+            >
+              Contactarme
+              <Mail className='h-4 w-4' />
+            </a>
+          </div>
+
+          <div className='mt-8 flex flex-wrap gap-3'>
+            <a
+              href='https://github.com/vitorinoluca'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-white/72 transition-colors hover:border-white/25 hover:bg-white/[0.08] hover:text-white'
+              aria-label='Abrir GitHub'
+            >
+              <Code2 className='h-4 w-4' />
+            </a>
+            <a
+              href='https://www.linkedin.com/in/luca-vitorino/'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-white/72 transition-colors hover:border-white/25 hover:bg-white/[0.08] hover:text-white'
+              aria-label='Abrir LinkedIn'
+            >
+              <BriefcaseBusiness className='h-4 w-4' />
+            </a>
+            <a
+              href='mailto:valentinvitorimo28@gmail.com'
+              className='inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-white/72 transition-colors hover:border-white/25 hover:bg-white/[0.08] hover:text-white'
+              aria-label='Enviar email'
+            >
+              <Mail className='h-4 w-4' />
+            </a>
+          </div>
         </motion.div>
 
-        <DesktopWindow
-          title='terminal'
-          isDraggable={isDesktop}
-          className='md:left-1/2 md:top-1/2 md:w-[560px] md:-translate-x-1/2 md:-translate-y-1/2'
+        <motion.div
+          initial={{ opacity: 0, y: 28, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.75, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+          className='min-w-0 w-full'
         >
-          <div className='min-h-[300px] p-5 font-mono text-sm leading-6 text-[#e5e5e5]'>
-            <p>
-              <span className='text-green-400'>$</span> boot portfolio.desktop
-            </p>
-            <p className='text-white/45'>iniciando experiencia...</p>
-            <p className='mt-4'>
-              <span className='text-green-400'>$</span> whoami
-            </p>
-            <p className='text-yellow-300'>frontend developer con obsesion por el detalle</p>
-            <p className='mt-4'>
-              <span className='text-green-400'>$</span> open curiosity.txt
-            </p>
-            <p className='text-white/65'>
-              si algo se siente simple, probablemente hubo mucho trabajo detras.
-            </p>
-            <p className='mt-4'>
-              <span className='text-green-400'>$</span> scroll --continue
-              <motion.span
-                animate={{ opacity: [1, 0, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-                className='ml-1 inline-block h-4 w-2 translate-y-0.5 bg-green-400'
-              />
-            </p>
-          </div>
-        </DesktopWindow>
-
-        <DesktopWindow
-          title='note.md'
-          isDraggable={isDesktop}
-          className='md:right-8 md:top-[16%] md:w-[280px]'
-        >
-          <div className='p-4 font-mono text-sm leading-6 text-white/70'>
-            <p className='text-purple-300'># reminder</p>
-            <p className='mt-2'>menos ruido, mas intencion.</p>
-            <p className='mt-3 text-white/45'>pixel-perfect mode: on</p>
-          </div>
-        </DesktopWindow>
-
-        <DesktopWindow
-          title='focus.json'
-          isDraggable={isDesktop}
-          className='md:bottom-[14%] md:left-[10%] md:w-[300px]'
-        >
-          <div className='p-4 font-mono text-sm leading-6 text-[#e5e5e5]'>
-            <p>
-              <span className='text-green-300'>"status"</span>: {' '}
-              <span className='text-yellow-300'>"building"</span>,
-            </p>
-            <p>
-              <span className='text-green-300'>"mood"</span>: {' '}
-              <span className='text-yellow-300'>"curious"</span>,
-            </p>
-            <p>
-              <span className='text-green-300'>"details"</span>: {' '}
-              <span className='text-orange-300'>true</span>
-            </p>
-          </div>
-        </DesktopWindow>
-
-        <DesktopWindow
-          title='system'
-          isDraggable={isDesktop}
-          className='md:bottom-[18%] md:right-[12%] md:w-[260px]'
-        >
-          <div className='space-y-3 p-4 font-mono text-xs text-white/60'>
-            <div>
-              <div className='mb-1 flex justify-between'>
-                <span>creativity</span>
-                <span>92%</span>
+          <div className='mac-window'>
+            <div className='mac-titlebar justify-between px-4 py-3'>
+              <div className='min-w-0 flex items-center gap-2'>
+                <TerminalSquare className='h-4 w-4 text-emerald-300' />
+                <span className='truncate font-mono text-xs text-white/65'>luca.profile</span>
               </div>
-              <div className='h-1.5 rounded-full bg-white/10'>
-                <div className='h-full w-[92%] rounded-full bg-purple-400/70' />
-              </div>
+              <span className='hidden shrink-0 font-mono text-[11px] text-white/35 sm:inline'>production-ready</span>
             </div>
-            <div>
-              <div className='mb-1 flex justify-between'>
-                <span>patience</span>
-                <span>100%</span>
-              </div>
-              <div className='h-1.5 rounded-full bg-white/10'>
-                <div className='h-full w-full rounded-full bg-blue-400/70' />
-              </div>
+
+            <div className='space-y-3 p-4 font-mono text-xs leading-6 sm:text-sm sm:leading-7 md:p-6'>
+              {terminalLines.map((line) => (
+                <p key={`${line.prompt}-${line.text}`} className='terminal-line'>
+                  <span className={line.prompt === '$' ? 'text-cyan-300' : 'text-emerald-300'}>
+                    {line.prompt}
+                  </span>{' '}
+                  <span className={line.prompt === '$' ? 'text-yellow-200' : 'text-white/68'}>
+                    {line.text}
+                  </span>
+                </p>
+              ))}
+            </div>
+
+            <div className='grid border-t border-white/10 bg-black/14 sm:grid-cols-3'>
+              {stackItems.map((item) => (
+                <div
+                  key={item.label}
+                  className='border-t border-white/10 p-4 sm:border-t-0 sm:border-l sm:first:border-l-0'
+                >
+                  <item.Icon className='mb-3 h-5 w-5 text-cyan-300' />
+                  <p className='font-mono text-xs uppercase tracking-wide text-white/40'>
+                    {item.label}
+                  </p>
+                  <p className='mt-2 text-sm leading-6 text-white/72'>{item.value}</p>
+                </div>
+              ))}
             </div>
           </div>
-        </DesktopWindow>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,8 +1,9 @@
-import { Battery, Search, Wifi } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
 
 const navItems = [
-  { label: 'Sobre mí', href: '#about' },
+  { label: 'Sobre mi', href: '#about' },
+  { label: 'Estudios', href: '#studies' },
   { label: 'Proyectos', href: '#projects' },
   { label: 'Contacto', href: '#contact' },
 ];
@@ -26,6 +27,13 @@ function formatDateTime(date: Date) {
 
 export default function MacNavbar() {
   const [dateTime, setDateTime] = useState(() => formatDateTime(new Date()));
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
+
+  const sections = useMemo(
+    () => ['hero', ...navItems.map((item) => item.href.replace('#', ''))],
+    [],
+  );
 
   useEffect(() => {
     const intervalId = window.setInterval(() => {
@@ -35,40 +43,138 @@ export default function MacNavbar() {
     return () => window.clearInterval(intervalId);
   }, []);
 
+  useEffect(() => {
+    const updateActiveSection = () => {
+      const marker = window.scrollY + window.innerHeight * 0.35;
+      let current = sections[0];
+
+      for (const section of sections) {
+        const node = document.getElementById(section);
+        if (!node) continue;
+
+        const top = node.offsetTop;
+        const bottom = top + node.offsetHeight;
+
+        if (marker >= top && marker < bottom) {
+          current = section;
+          break;
+        }
+
+        if (marker >= top) {
+          current = section;
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    updateActiveSection();
+    window.addEventListener('scroll', updateActiveSection, { passive: true });
+    window.addEventListener('resize', updateActiveSection);
+
+    return () => {
+      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('resize', updateActiveSection);
+    };
+  }, [sections]);
+
+  const navigateTo = (href: string) => {
+    const id = href.replace('#', '');
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setMenuOpen(false);
+      return;
+    }
+    window.location.hash = href;
+    setMenuOpen(false);
+  };
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-black/35 text-white shadow-[0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-2xl">
-      <nav className="mx-auto flex h-8 max-w-7xl items-center justify-between px-4 text-[13px] sm:px-6">
-        <div className="flex min-w-0 items-center gap-5">
-          <a
-            href="#about"
-            className="font-mono font-semibold tracking-tight text-white"
-            aria-label="Ir al inicio"
+    <header className='fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#08090b]/70 text-white shadow-[0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-2xl'>
+      <nav className='mx-auto flex h-12 max-w-7xl items-center justify-between px-4 text-[13px] sm:px-6'>
+        <div className='flex min-w-0 items-center gap-5'>
+          <button
+            type='button'
+            onClick={() => navigateTo('#hero')}
+            className='font-mono font-semibold tracking-tight text-white transition-colors hover:text-cyan-200'
+            aria-label='Ir al inicio'
           >
             &lt;dev/&gt;
-          </a>
+          </button>
 
-          <div className="hidden items-center gap-4 text-white/75 md:flex">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="transition-colors hover:text-white"
-              >
-                {item.label}
-              </a>
-            ))}
+          <div className='hidden items-center gap-1 text-white/68 md:flex'>
+            {navItems.map((item) => {
+              const isActive = activeSection === item.href.replace('#', '');
+              return (
+                <button
+                  key={item.href}
+                  type='button'
+                  onClick={() => navigateTo(item.href)}
+                  className={`rounded-md px-2.5 py-1 transition-colors ${
+                    isActive
+                      ? 'bg-white/[0.09] text-white'
+                      : 'hover:bg-white/[0.06] hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        <div className="flex items-center gap-3 text-white/80">
-          <Search className="hidden h-3.5 w-3.5 sm:block" aria-hidden="true" />
-          <Wifi className="h-3.5 w-3.5" aria-hidden="true" />
-          <Battery className="h-4 w-4" aria-hidden="true" />
-          <time className="tabular-nums text-white/85" dateTime={new Date().toISOString()}>
+        <div className='flex items-center gap-3 text-white/78'>
+          <button
+            type='button'
+            onClick={() => navigateTo('#contact')}
+            className='hidden rounded-md border border-emerald-300/25 bg-emerald-400/[0.08] px-2.5 py-1 font-mono text-[11px] text-emerald-200 transition-colors hover:bg-emerald-400/[0.12] md:inline-flex'
+          >
+            Disponible
+          </button>
+          <time className='tabular-nums text-white/85' dateTime={new Date().toISOString()}>
             {dateTime}
           </time>
+          <button
+            type='button'
+            onClick={() => setMenuOpen((prev) => !prev)}
+            className='inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/10 bg-white/[0.05] text-white md:hidden'
+            aria-label={menuOpen ? 'Cerrar menu' : 'Abrir menu'}
+            aria-expanded={menuOpen}
+            aria-controls='mobile-menu'
+          >
+            {menuOpen ? (
+              <X className='h-4 w-4' aria-hidden='true' />
+            ) : (
+              <Menu className='h-4 w-4' aria-hidden='true' />
+            )}
+          </button>
         </div>
       </nav>
+
+      {menuOpen && (
+        <div id='mobile-menu' className='border-t border-white/10 bg-[#08090b]/90 px-4 py-3 backdrop-blur-xl md:hidden'>
+          <div className='mx-auto flex max-w-7xl flex-col gap-2'>
+            {navItems.map((item) => {
+              const isActive = activeSection === item.href.replace('#', '');
+              return (
+                <button
+                  key={item.href}
+                  type='button'
+                  onClick={() => navigateTo(item.href)}
+                  className={`rounded-md px-3 py-2 text-left font-mono ${
+                    isActive
+                      ? 'bg-white/[0.09] text-white'
+                      : 'text-white/75 hover:bg-white/[0.06] hover:text-white'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </header>
   );
 }

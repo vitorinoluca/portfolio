@@ -1,28 +1,28 @@
 ﻿import CodeWindow from './components/CodeWindow';
+import ContactTerminal from './components/ContactTerminal';
+import StudiesLog from './components/ExperienceLog';
 import FileExplorer from './components/FileExplorer';
+import Footer from './components/Footer';
 import HeroDesktop from './components/HeroDesktop';
 import MacNavbar from './components/MacNavbar';
 
 export default function App() {
   return (
-    <main className='relative min-h-screen overflow-hidden bg-background text-foreground'>
-      <div
-        aria-hidden='true'
-        className='pointer-events-none fixed inset-0 z-0 overflow-hidden'
-      >
-        <div className='absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-size-[4rem_4rem]' />
-        <div className='absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl' />
-        <div className='absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl' />
-        <div className='absolute inset-0 bg-linear-to-b from-transparent via-transparent to-background' />
-      </div>
-
+    <main className='relative min-h-screen overflow-x-hidden bg-transparent text-foreground'>
       <MacNavbar />
 
       <HeroDesktop />
 
-      <section id='about' className='relative z-10 px-6 pb-20'>
+      <section id='about' className='relative z-10 px-6 py-24 md:py-32'>
         <div className='max-w-7xl mx-auto'>
-          <div className='grid gap-8 pt-32 md:grid-cols-2'>
+          <header className='mb-8 max-w-3xl'>
+            <p className='section-kicker mb-3'>~/profile</p>
+            <h2 className='text-3xl font-semibold tracking-normal text-white md:text-4xl'>Sobre mi</h2>
+            <p className='mt-3 max-w-2xl text-sm leading-7 text-white/56 md:text-base'>
+              Perfil tecnico, forma de trabajo y objetivos profesionales.
+            </p>
+          </header>
+          <div className='grid gap-8 md:grid-cols-2'>
             <CodeWindow title='developer.js'>
               <span className='text-white/30'>1 </span>
               <span className='text-purple-400'>const</span>
@@ -34,108 +34,118 @@ export default function App() {
               <span> </span>
               <span className='text-green-300'>nombre</span>
               <span>: </span>
-              <span className='text-yellow-300'>"Tu Nombre"</span>
+              <span className='text-yellow-300'>"Luca Vitorino"</span>
               <span>,</span>
               {'\n'}
               <span className='text-white/30'>3 </span>
               <span> </span>
               <span className='text-green-300'>rol</span>
               <span>: </span>
-              <span className='text-yellow-300'>"Full Stack Developer"</span>
+              <span className='text-yellow-300'>"Fullstack Developer"</span>
               <span>,</span>
               {'\n'}
               <span className='text-white/30'>4 </span>
               <span> </span>
-              <span className='text-green-300'>años</span>
+              <span className='text-green-300'>situacion</span>
               <span>: </span>
-              <span className='text-orange-300'>3</span>
+              <span className='text-yellow-300'>"Estudiante de sistemas, 21 años"</span>
               <span>,</span>
               {'\n'}
               <span className='text-white/30'>5 </span>
               <span> </span>
-              <span className='text-green-300'>pasión</span>
+              <span className='text-green-300'>ubicacion</span>
               <span>: </span>
-              <span className='text-yellow-300'>"Código limpio y UX"</span>
+              <span className='text-yellow-300'>"La Plata, Argentina"</span>
               <span>,</span>
               {'\n'}
               <span className='text-white/30'>6 </span>
               <span> </span>
-              <span className='text-green-300'>café</span>
+              <span className='text-green-300'>foco</span>
               <span>: </span>
-              <span className='text-orange-300'>true</span>
-              {'\n'}
-              <span className='text-white/30'>7 </span>
-              <span>{'}'};</span>
-            </CodeWindow>
-
-            <CodeWindow title='projects.js'>
-              <span className='text-white/30'>1 </span>
-              <span className='text-purple-400'>async function</span>
-              <span> </span>
-              <span className='text-blue-300'>fetchProjects</span>
-              <span>() {'{'}</span>
-              {'\n'}
-              <span className='text-white/30'>2 </span>
-              <span> </span>
-              <span className='text-purple-400'>return</span>
-              <span> [</span>
-              {'\n'}
-              <span className='text-white/30'>3 </span>
-              <span> {'{'}</span>
-              {'\n'}
-              <span className='text-white/30'>4 </span>
-              <span> </span>
-              <span className='text-green-300'>name</span>
-              <span>: </span>
-              <span className='text-yellow-300'>"E-Commerce"</span>
+              <span className='text-yellow-300'>
+                "frontend claro, backend ordenado y productos mantenibles"
+              </span>
               <span>,</span>
               {'\n'}
-              <span className='text-white/30'>5 </span>
-              <span> </span>
-              <span className='text-green-300'>stack</span>
-              <span>: [</span>
-              <span className='text-yellow-300'>"React"</span>
-              <span>, </span>
-              <span className='text-yellow-300'>"Node"</span>
-              <span>, </span>
-              <span className='text-yellow-300'>"MongoDB"</span>
-              <span>]</span>
-              {'\n'}
-              <span className='text-white/30'>6 </span>
-              <span> {'}'},</span>
-              {'\n'}
               <span className='text-white/30'>7 </span>
-              <span> {'{'}</span>
+              <span> </span>
+              <span className='text-green-300'>buscando</span>
+              <span>: </span>
+              <span className='text-yellow-300'>
+                "primeras oportunidades IT y proyectos freelance"
+              </span>
+              <span>,</span>
               {'\n'}
               <span className='text-white/30'>8 </span>
               <span> </span>
-              <span className='text-green-300'>name</span>
+              <span className='text-green-300'>disponible</span>
               <span>: </span>
-              <span className='text-yellow-300'>"Task Manager"</span>
+              <span className='text-orange-300'>true</span>
               <span>,</span>
               {'\n'}
               <span className='text-white/30'>9 </span>
+              <span>{'}'};</span>
+            </CodeWindow>
+
+            <CodeWindow title='workflow.js'>
+              <span className='text-white/30'>1 </span>
+              <span className='text-purple-400'>const</span>
               <span> </span>
-              <span className='text-green-300'>stack</span>
-              <span>: [</span>
-              <span className='text-yellow-300'>"Next.js"</span>
-              <span>, </span>
-              <span className='text-yellow-300'>"PostgreSQL"</span>
-              <span>]</span>
+              <span className='text-blue-300'>workflow</span>
+              <span> = [</span>
               {'\n'}
-              <span className='text-white/30'>10 </span>
-              <span> {'}'}</span>
+              <span className='text-white/30'>2 </span>
+              <span> </span>
+              <span className='text-yellow-300'>"entender el problema"</span>
+              <span>,</span>
               {'\n'}
-              <span className='text-white/30'>11 </span>
+              <span className='text-white/30'>3 </span>
+              <span> </span>
+              <span className='text-yellow-300'>"disenar una interfaz usable"</span>
+              <span>,</span>
+              {'\n'}
+              <span className='text-white/30'>4 </span>
+              <span> </span>
+              <span className='text-yellow-300'>"modelar datos y endpoints"</span>
+              <span>,</span>
+              {'\n'}
+              <span className='text-white/30'>5 </span>
+              <span> </span>
+              <span className='text-yellow-300'>"iterar con feedback"</span>
+              <span>,</span>
+              {'\n'}
+              <span className='text-white/30'>6 </span>
               <span> ];</span>
-              {'\n'}
-              <span className='text-white/30'>12 </span>
-              <span>{'}'}</span>
+              {'\n\n'}
+              <span className='text-white/30'>8 </span>
+              <span className='text-purple-400'>export</span>
+              <span> </span>
+              <span className='text-purple-400'>default</span>
+              <span> workflow;</span>
             </CodeWindow>
           </div>
+        </div>
+      </section>
+
+      <section id='studies' className='relative z-10 px-6 py-24 md:py-28'>
+        <div className='max-w-7xl mx-auto'>
+          <StudiesLog />
+        </div>
+      </section>
+
+      <section id='projects' className='relative z-10 px-6 py-24 md:py-32'>
+        <div className='max-w-7xl mx-auto'>
           <FileExplorer />
         </div>
       </section>
+
+      <section id='contact' className='relative z-10 px-6 py-24 md:py-32'>
+        <div className='mx-auto max-w-3xl'>
+          <ContactTerminal />
+        </div>
+      </section>
+
+      <Footer />
     </main>
   );
 }
