@@ -101,7 +101,7 @@ export default function App() {
               {'\n'}
               <span className='text-white/30'>3 </span>
               <span> </span>
-              <span className='text-yellow-300'>"disenar una interfaz usable"</span>
+              <span className='text-yellow-300'>"diseñar una interfaz usable"</span>
               <span>,</span>
               {'\n'}
               <span className='text-white/30'>4 </span>

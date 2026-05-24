@@ -7,4 +7,4 @@ El sitio presenta perfil profesional, formacion, proyectos destacados y canales
 de contacto en una interfaz minimalista inspirada en macOS y terminales.
 
 Incluye proyectos personales, trabajos web y Fluxify, un emprendimiento digital
-enfocado en desarrollo web, diseno y soluciones tecnicas para marcas.
+enfocado en desarrollo web, diseño y soluciones tecnicas para marcas.

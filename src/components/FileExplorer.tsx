@@ -73,7 +73,7 @@ const projects: Project[] = [
     name: 'Fluxify',
     status: 'produccion',
     description:
-      'Emprendimiento digital de desarrollo web, diseno y soluciones tecnicas a medida para potenciar marcas con sitios modernos, rapidos y optimizados.',
+      'Emprendimiento digital de desarrollo web, diseño y soluciones tecnicas a medida para potenciar marcas con sitios modernos, rapidos y optimizados.',
     stack: ['React', 'Typescript', 'Tailwind'],
     demoUrl: 'https://fluxify.site',
   },
