@@ -1,113 +1,76 @@
 import { motion } from 'motion/react';
-type Command = {
-  command: string;
-  output: string;
-  href?: string;
+import { ArrowUpRight } from 'lucide-react';
+import SectionHeading from './SectionHeading';
+
+type Contact = {
+  label: string;
+  value: string;
+  href: string;
 };
 
-const commands: Command[] = [
+const contacts: Contact[] = [
   {
-    command: 'open --email',
-    output: 'valentinvitorimo28@gmail.com',
+    label: 'Email',
+    value: 'valentinvitorimo28@gmail.com',
     href: 'mailto:valentinvitorimo28@gmail.com',
   },
   {
-    command: 'open --github',
-    output: 'github.com/vitorinoluca',
+    label: 'GitHub',
+    value: 'github.com/vitorinoluca',
     href: 'https://github.com/vitorinoluca',
   },
   {
-    command: 'open --linkedin',
-    output: 'linkedin.com/in/luca-vitorino',
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/luca-vitorino',
     href: 'https://www.linkedin.com/in/luca-vitorino/',
   },
-  {
-    command: 'book --call',
-    output: 'escribime y coordinamos una reunion de 20 min',
-    href: 'mailto:valentinvitorimo28@gmail.com?subject=Consulta%20desde%20portfolio',
-  },
-  {
-    command: 'response-time',
-    output: '< 24h',
-  },
 ];
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+};
+
+const row = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
+};
 
 export default function ContactTerminal() {
   return (
     <div className='min-w-0'>
+      <SectionHeading
+        kicker='Contacto'
+        title='Hablemos'
+        description='Enviame una consulta, oportunidad laboral o propuesta freelance. Respondo en menos de 24h.'
+      />
+
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className='mb-8'
+        variants={container}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.3 }}
+        className='border-t border-border'
       >
-        <p className='section-kicker mb-3'>~/contact</p>
-        <h2 className='mb-3 text-4xl font-semibold tracking-normal md:text-5xl'>
-          <span className='font-mono text-white/40'>$</span> contact
-        </h2>
-        <p className='max-w-2xl text-sm leading-7 text-white/58 md:text-base'>
-          Enviame una consulta, oportunidad laboral o propuesta freelance.
-        </p>
+        {contacts.map((item) => (
+          <motion.a
+            key={item.label}
+            variants={row}
+            href={item.href}
+            target={item.href.startsWith('mailto:') ? undefined : '_blank'}
+            rel={item.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+            className='group flex flex-wrap items-center justify-between gap-3 border-b border-border py-6 transition-colors hover:bg-white/[0.02]'
+          >
+            <div className='flex items-baseline gap-4'>
+              <span className='edge-label w-20 shrink-0'>{item.label}</span>
+              <span className='font-display text-xl font-semibold text-foreground transition-colors group-hover:text-accent sm:text-2xl'>
+                {item.value}
+              </span>
+            </div>
+            <ArrowUpRight className='h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-accent' />
+          </motion.a>
+        ))}
       </motion.div>
-
-      <motion.article
-        initial={{ opacity: 0, y: 28, scale: 0.97 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-        className='mac-window'
-      >
-        <div className='mac-titlebar px-3 py-2'>
-          <div className='flex gap-1.5' aria-hidden='true'>
-            <span className='traffic-dot bg-[#ff5f57]' />
-            <span className='traffic-dot bg-[#febc2e]' />
-            <span className='traffic-dot bg-[#28c840]' />
-          </div>
-          <span className='min-w-0 flex-1 truncate px-2 text-center font-mono text-xs text-white/55'>
-            contact - luca@portfolio
-          </span>
-          <span className='w-[42px]' aria-hidden='true' />
-        </div>
-
-        <div className='space-y-2 p-4 font-mono text-xs leading-6 text-[#e8edf5] sm:p-5 sm:text-[15px] sm:leading-7'>
-          <p className='text-white/65'>comandos disponibles:</p>
-          {commands.map((item) => (
-            <p key={item.command} className='terminal-line pl-2'>
-              <span className='text-green-400'>luca@portfolio</span>
-              <span className='text-white/55'>:</span>
-              <span className='text-blue-300'>~</span>
-              <span className='text-white/55'>$</span>{' '}
-              <span className='text-yellow-300'>{item.command}</span>
-              <span className='text-white/45'>{' -> '}</span>
-              {item.href ? (
-                <a
-                  href={item.href}
-                  target={item.href.startsWith('mailto:') ? undefined : '_blank'}
-                  rel={item.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                  className='underline decoration-cyan-300/40 underline-offset-4 hover:text-cyan-300'
-                >
-                  {item.output}
-                </a>
-              ) : (
-                <span className='text-cyan-300'>{item.output}</span>
-              )}
-            </p>
-          ))}
-
-          <p className='terminal-line flex flex-wrap items-center pt-3'>
-            <span className='text-green-400'>luca@portfolio</span>
-            <span className='text-white/55'>:</span>
-            <span className='text-blue-300'>~</span>
-            <span className='text-white/55'>$</span>
-            <motion.span
-              animate={{ opacity: [1, 0, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-              className='ml-2 inline-block h-4 w-2 translate-y-0.5 bg-green-400'
-            />
-          </p>
-        </div>
-      </motion.article>
     </div>
   );
 }

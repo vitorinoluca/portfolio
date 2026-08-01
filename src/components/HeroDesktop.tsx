@@ -1,173 +1,114 @@
 import { motion } from 'motion/react';
-import {
-  ArrowDown,
-  BriefcaseBusiness,
-  Code2,
-  Database,
-  Mail,
-  MapPin,
-  Server,
-  TerminalSquare,
-} from 'lucide-react';
-import heroBg from '../assets/hero-bg.jpg';
+import { ArrowDown, ArrowUpRight, BriefcaseBusiness, Code2, Mail } from 'lucide-react';
 
-const stackItems = [
-  { label: 'Frontend', value: 'React, TypeScript, Tailwind', Icon: Code2 },
-  { label: 'Backend', value: 'Node, Express, APIs REST', Icon: Server },
-  { label: 'Datos', value: 'MongoDB, PostgreSQL, persistencia', Icon: Database },
-];
+const container = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.12, delayChildren: 0.05 },
+  },
+};
 
-const terminalLines = [
-  { prompt: '$', text: 'profile --summary' },
-  { prompt: '>', text: 'Fullstack developer en formacion constante.' },
-  { prompt: '>', text: 'Construyo interfaces claras y productos web mantenibles.' },
-  { prompt: '$', text: 'availability --status' },
-  { prompt: '>', text: 'Disponible para oportunidades IT y proyectos freelance.' },
-];
+const item = {
+  hidden: { opacity: 0, y: 28 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
 
 export default function HeroDesktop() {
   return (
-    <section
-      id='hero'
-      className='relative z-10 min-h-dvh overflow-hidden px-6 pt-24 pb-10 md:px-8 lg:px-10'
-    >
-      <div
-        aria-hidden='true'
-        className='pointer-events-none absolute inset-0'
-        style={{
-          maskImage: 'linear-gradient(to bottom, black 0%, black 78%, transparent 100%)',
-          WebkitMaskImage:
-            'linear-gradient(to bottom, black 0%, black 78%, transparent 100%)',
-        }}
+    <section id='hero' className='relative z-10 flex min-h-dvh flex-col justify-center px-6 pt-24 pb-16 md:px-10'>
+      <motion.div
+        variants={container}
+        initial='hidden'
+        animate='show'
+        className='mx-auto w-full max-w-6xl min-w-0'
       >
-        <div
-          style={{ backgroundImage: `url(${heroBg})` }}
-          className='absolute inset-0 bg-cover bg-center bg-no-repeat'
-        />
-        <div className='absolute inset-0 bg-black/78' />
-        <div className='absolute inset-0 bg-[linear-gradient(120deg,rgba(94,234,212,0.13),rgba(8,9,11,0.78)_45%,rgba(255,255,255,0.04))]' />
-        <div className='absolute inset-x-0 bottom-0 h-64 bg-[linear-gradient(to_bottom,transparent,var(--color-background))]' />
-      </div>
-
-      <div className='relative mx-auto grid min-h-[calc(100dvh-8.5rem)] w-full max-w-7xl min-w-0 items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]'>
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className='min-w-0 max-w-4xl'
+        <motion.h1
+          variants={item}
+          className='font-display text-[15vw] font-bold uppercase leading-[0.86] tracking-tight text-foreground sm:text-[10vw] lg:text-[7.5rem]'
         >
-          <div className='mb-7 flex flex-wrap items-center gap-2 font-mono text-xs text-white/70'>
-            <span className='inline-flex items-center gap-2 rounded-md border border-emerald-300/20 bg-emerald-400/[0.08] px-3 py-1.5 text-emerald-200'>
-              <span className='h-2 w-2 rounded-full bg-emerald-300' />
-              Disponible
-            </span>
-            <span className='inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-3 py-1.5'>
-              <MapPin className='h-3.5 w-3.5 text-cyan-300' />
-              La Plata, Argentina
-            </span>
+          Luca
+          <br />
+          Vitorino
+        </motion.h1>
+
+        <motion.div
+          variants={item}
+          className='mt-8 flex flex-col gap-8 border-t border-border pt-8 lg:flex-row lg:items-end lg:justify-between'
+        >
+          <div className='max-w-xl'>
+            <p className='font-display text-xl font-semibold text-accent'>Fullstack Developer</p>
+            <p className='mt-3 text-lg leading-8 text-muted-foreground'>
+              Desarrollo aplicaciones web con foco en interfaces limpias, logica clara y bases
+              solidas para llevar ideas a produccion.
+            </p>
           </div>
 
-          <p className='mb-4 font-mono text-sm uppercase tracking-[0.18em] text-cyan-200/78'>
-            Fullstack Developer
-          </p>
-          <h1 className='max-w-5xl text-5xl font-semibold leading-[1.02] tracking-normal text-white sm:text-6xl lg:text-7xl'>
-            Luca Valentin Vitorino
-          </h1>
-          <p className='mt-6 max-w-2xl text-lg leading-8 text-white/66 sm:text-xl'>
-            Desarrollo aplicaciones web con foco en interfaces limpias, logica clara y bases solidas para llevar ideas a produccion.
-          </p>
-
-          <div className='mt-9 flex flex-col gap-3 sm:flex-row'>
-            <a
+          <div className='flex flex-wrap gap-3'>
+            <motion.a
               href='#projects'
-              className='inline-flex items-center justify-center gap-2 rounded-md bg-white px-5 py-3 font-mono text-sm font-semibold text-black transition-colors hover:bg-cyan-100'
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] as const }}
+              className='inline-flex items-center gap-2 border border-accent bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground transition-colors hover:bg-transparent hover:text-accent'
             >
               Ver proyectos
               <ArrowDown className='h-4 w-4' />
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href='#contact'
-              className='inline-flex items-center justify-center gap-2 rounded-md border border-white/[0.12] bg-white/[0.04] px-5 py-3 font-mono text-sm font-semibold text-white/[0.86] transition-colors hover:border-cyan-300/35 hover:bg-cyan-400/10 hover:text-cyan-100'
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] as const }}
+              className='inline-flex items-center gap-2 border border-border px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:border-accent hover:text-accent'
             >
               Contactarme
               <Mail className='h-4 w-4' />
-            </a>
-          </div>
-
-          <div className='mt-8 flex flex-wrap gap-3'>
-            <a
-              href='https://github.com/vitorinoluca'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-white/72 transition-colors hover:border-white/25 hover:bg-white/[0.08] hover:text-white'
-              aria-label='Abrir GitHub'
-            >
-              <Code2 className='h-4 w-4' />
-            </a>
-            <a
-              href='https://www.linkedin.com/in/luca-vitorino/'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-white/72 transition-colors hover:border-white/25 hover:bg-white/[0.08] hover:text-white'
-              aria-label='Abrir LinkedIn'
-            >
-              <BriefcaseBusiness className='h-4 w-4' />
-            </a>
-            <a
-              href='mailto:valentinvitorimo28@gmail.com'
-              className='inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-white/72 transition-colors hover:border-white/25 hover:bg-white/[0.08] hover:text-white'
-              aria-label='Enviar email'
-            >
-              <Mail className='h-4 w-4' />
-            </a>
+            </motion.a>
           </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 28, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.75, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          className='min-w-0 w-full'
+          variants={item}
+          className='mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground'
         >
-          <div className='mac-window'>
-            <div className='mac-titlebar justify-between px-4 py-3'>
-              <div className='min-w-0 flex items-center gap-2'>
-                <TerminalSquare className='h-4 w-4 text-emerald-300' />
-                <span className='truncate font-mono text-xs text-white/65'>luca.profile</span>
-              </div>
-              <span className='hidden shrink-0 font-mono text-[11px] text-white/35 sm:inline'>production-ready</span>
-            </div>
-
-            <div className='space-y-3 p-4 font-mono text-xs leading-6 sm:text-sm sm:leading-7 md:p-6'>
-              {terminalLines.map((line) => (
-                <p key={`${line.prompt}-${line.text}`} className='terminal-line'>
-                  <span className={line.prompt === '$' ? 'text-cyan-300' : 'text-emerald-300'}>
-                    {line.prompt}
-                  </span>{' '}
-                  <span className={line.prompt === '$' ? 'text-yellow-200' : 'text-white/68'}>
-                    {line.text}
-                  </span>
-                </p>
-              ))}
-            </div>
-
-            <div className='grid border-t border-white/10 bg-black/14 sm:grid-cols-3'>
-              {stackItems.map((item) => (
-                <div
-                  key={item.label}
-                  className='border-t border-white/10 p-4 sm:border-t-0 sm:border-l sm:first:border-l-0'
-                >
-                  <item.Icon className='mb-3 h-5 w-5 text-cyan-300' />
-                  <p className='font-mono text-xs uppercase tracking-wide text-white/40'>
-                    {item.label}
-                  </p>
-                  <p className='mt-2 text-sm leading-6 text-white/72'>{item.value}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <span>La Plata, Argentina</span>
+          <span className='inline-flex items-center gap-2'>
+            <span className='h-1.5 w-1.5 rounded-full bg-accent' />
+            Disponible para nuevos proyectos
+          </span>
+          <a
+            href='https://github.com/vitorinoluca'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='inline-flex items-center gap-1.5 transition-colors hover:text-accent'
+          >
+            <Code2 className='h-4 w-4' />
+            GitHub
+            <ArrowUpRight className='h-3 w-3' />
+          </a>
+          <a
+            href='https://www.linkedin.com/in/luca-vitorino/'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='inline-flex items-center gap-1.5 transition-colors hover:text-accent'
+          >
+            <BriefcaseBusiness className='h-4 w-4' />
+            LinkedIn
+            <ArrowUpRight className='h-3 w-3' />
+          </a>
+          <a
+            href='mailto:valentinvitorimo28@gmail.com'
+            className='inline-flex items-center gap-1.5 transition-colors hover:text-accent'
+          >
+            <Mail className='h-4 w-4' />
+            valentinvitorimo28@gmail.com
+          </a>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

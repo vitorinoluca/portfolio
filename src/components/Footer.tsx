@@ -1,10 +1,10 @@
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className='relative z-10 border-t border-white/[0.08] bg-[#030405] px-6 py-6 shadow-[0_-24px_80px_rgba(0,0,0,0.42)]'>
-      <p className='mx-auto max-w-7xl text-center font-mono text-xs leading-6 text-white/[0.42]'>
-        Copyright <span className='tabular-nums'>{year}</span> - diseñado y desarrollado por{' '}
-        <span className='text-white/70'>Luca Valentin Vitorino</span> - React + TypeScript + Tailwind
+    <footer className='relative z-10 border-t border-border px-6 py-6 md:px-10'>
+      <p className='mx-auto max-w-6xl text-center text-xs leading-6 text-muted-foreground'>
+        © <span className='tabular-nums'>{year}</span> Luca Valentin Vitorino — React + TypeScript
+        + Tailwind
       </p>
     </footer>
   );
