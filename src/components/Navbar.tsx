@@ -3,12 +3,13 @@ import { useEffect, useMemo, useState } from 'react';
 
 const navItems = [
   { label: 'Proyectos', href: '#projects' },
-  { label: 'Sobre mi', href: '#about' },
+  { label: 'Fluxify', href: '#fluxify' },
   { label: 'Formacion', href: '#studies' },
   { label: 'Contacto', href: '#contact' },
+  { label: 'Recorrido', href: '#timeline' },
 ];
 
-export default function MacNavbar() {
+export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
@@ -65,12 +66,12 @@ export default function MacNavbar() {
   };
 
   return (
-    <header className='fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 text-foreground backdrop-blur-md'>
-      <nav className='mx-auto flex h-14 max-w-6xl items-center justify-between px-6 text-sm md:px-10'>
+    <header className='fixed inset-x-0 top-0 z-50 border-b border-line bg-paper/90 text-ink backdrop-blur-md'>
+      <nav className='mx-auto flex h-14 max-w-5xl items-center justify-between px-6 text-sm md:px-8'>
         <button
           type='button'
           onClick={() => navigateTo('#hero')}
-          className='font-display text-base font-bold tracking-tight text-foreground transition-colors hover:text-accent'
+          className='font-display text-base font-bold tracking-tight text-ink transition-colors hover:text-stamp'
           aria-label='Ir al inicio'
         >
           LV
@@ -84,8 +85,8 @@ export default function MacNavbar() {
                 key={item.href}
                 type='button'
                 onClick={() => navigateTo(item.href)}
-                className={`font-medium transition-colors ${
-                  isActive ? 'text-accent' : 'text-foreground/70 hover:text-foreground'
+                className={`pressable transition-colors ${
+                  isActive ? 'font-semibold text-ink' : 'font-medium text-ink/60 hover:text-ink'
                 }`}
               >
                 {item.label}
@@ -97,7 +98,7 @@ export default function MacNavbar() {
         <button
           type='button'
           onClick={() => setMenuOpen((prev) => !prev)}
-          className='inline-flex h-9 w-9 items-center justify-center border border-border text-foreground md:hidden'
+          className='pressable inline-flex h-9 w-9 items-center justify-center border border-line text-ink md:hidden'
           aria-label={menuOpen ? 'Cerrar menu' : 'Abrir menu'}
           aria-expanded={menuOpen}
           aria-controls='mobile-menu'
@@ -111,7 +112,7 @@ export default function MacNavbar() {
       </nav>
 
       {menuOpen && (
-        <div id='mobile-menu' className='border-t border-border bg-background px-6 py-3 md:hidden'>
+        <div id='mobile-menu' className='border-t border-line bg-paper px-6 py-3 md:hidden'>
           <div className='flex flex-col gap-1'>
             {navItems.map((item) => {
               const isActive = activeSection === item.href.replace('#', '');
@@ -120,9 +121,7 @@ export default function MacNavbar() {
                   key={item.href}
                   type='button'
                   onClick={() => navigateTo(item.href)}
-                  className={`py-2 text-left font-medium ${
-                    isActive ? 'text-accent' : 'text-foreground/75'
-                  }`}
+                  className={`py-2 text-left font-medium ${isActive ? 'text-stamp' : 'text-ink/75'}`}
                 >
                   {item.label}
                 </button>
