@@ -12,6 +12,7 @@ dist/
 .vite-temp/
 .cache/
 .parcel-cache/
+.astro/
 
 .DS_Store
 Thumbs.db

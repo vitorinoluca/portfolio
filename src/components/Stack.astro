@@ -1,0 +1,100 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+type Item = { label: string; milestone?: boolean };
+
+const years: { year: string; items: Item[] }[] = [
+  {
+    year: '2022',
+    items: [
+      { label: 'HTML' },
+      { label: 'CSS' },
+      { label: 'JavaScript' },
+      { label: 'Sass' },
+      { label: 'Bootstrap' },
+      { label: 'SEO' },
+      { label: 'Git' },
+      { label: 'GitHub' },
+    ],
+  },
+  {
+    year: '2023',
+    items: [
+      { label: 'JavaScript' },
+      { label: 'React.js' },
+      { label: 'Node.js' },
+    ],
+  },
+  {
+    year: '2024',
+    items: [
+      { label: 'Express.js' },
+      { label: 'MongoDB' },
+      { label: 'TypeScript' },
+      { label: 'WebSockets' },
+      { label: 'Next.js' },
+      { label: 'Astro' },
+    ],
+  },
+  {
+    year: '2025',
+    items: [
+      { label: 'PostgreSQL' },
+      { label: 'Redis' },
+      { label: 'NestJS' },
+      { label: 'Docker' },
+      { label: 'localhost:forum', milestone: true },
+    ],
+  },
+  {
+    year: '2026',
+    items: [
+      { label: 'Agentes' },
+      { label: 'n8n' },
+      { label: 'Automatizaciones' },
+      { label: 'Fundación de Fluxify', milestone: true },
+      { label: 'Facturas electrónicas ARCA', milestone: true },
+    ],
+  },
+];
+---
+
+<section
+  id='stack'
+  class='mx-auto max-w-[1100px] scroll-mt-20 px-5 pt-[clamp(72px,12vw,128px)] sm:px-8'
+  data-reveal
+>
+  <SectionHeading
+    title='Stack'
+    description='Mi evolución como desarrollador.'
+  />
+
+  {
+    years.map((row, i) => (
+      <div
+        class='grid grid-cols-[clamp(72px,10vw,104px)_minmax(0,1fr)] gap-[clamp(16px,3vw,28px)] py-[clamp(20px,4vw,28px)]'
+        style={
+          i < years.length - 1
+            ? `background: linear-gradient(to right, transparent, color-mix(in srgb, var(--color-text) 8%, transparent) 48px, color-mix(in srgb, var(--color-text) 8%, transparent) calc(100% - 48px), transparent) no-repeat bottom / 100% 1px;`
+            : undefined
+        }
+      >
+        <span class='text-[26px] font-medium tracking-[-0.02em] text-(--color-accent-400)'>
+          {row.year}
+        </span>
+        <div class='flex flex-wrap items-center gap-2.5'>
+          {row.items.map((item) => (
+            <span
+              class:list={[
+                'tag',
+                item.milestone ? 'tag-outline' : 'tag-neutral',
+              ]}
+            >
+              {item.label}
+            </span>
+          ))}
+        </div>
+      </div>
+    ))
+  }
+</section>

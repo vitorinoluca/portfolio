@@ -1,0 +1,105 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+const education = [
+  {
+    year: '2025 — actualidad',
+    title: 'Universidad Nacional de La Plata',
+    detail: 'Licenciatura en Sistemas, Facultad de Informática.',
+  },
+  {
+    year: 'Sep — Dic 2023',
+    title: 'Universidad Tecnológica Nacional',
+    detail: 'Programador Web Avanzado, Full Stack Developer.',
+  },
+  {
+    year: 'Feb — Abr 2023',
+    title: 'CoderHouse',
+    detail:
+      'Curso de React.js: componentes, estado, routing y consumo de APIs.',
+  },
+];
+---
+
+<section
+  id='sobre-mi'
+  class='mx-auto max-w-[1100px] scroll-mt-20 px-5 pt-[clamp(72px,12vw,128px)] sm:px-8'
+  data-reveal
+>
+  <SectionHeading
+    title='Sobre mí'
+    description='Acerca de mí y mi formación.'
+  />
+
+  <div
+    class='mt-10 grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-[clamp(32px,5vw,56px)]'
+  >
+    <div class='flex flex-col gap-5'>
+      <p
+        class='text-lg leading-[1.65]'
+        style='color: color-mix(in srgb, var(--color-text) 85%, transparent);'
+      >
+        Arranqué en 2022 con HTML y CSS, después sumé JavaScript, React y el
+        backend con Node y NestJS. Hoy trabajo en todo el stack, del frontend
+        a la base de datos.
+      </p>
+      <p
+        class='text-base leading-[1.75]'
+        style='color: color-mix(in srgb, var(--color-text) 70%, transparent);'
+      >
+        Intento armar aplicaciones que resuelvan un problema real. Busco un
+        equipo donde pueda seguir tocando todo el stack y aprender de gente
+        con más experiencia en el día a día.
+      </p>
+      <p
+        class='text-base leading-[1.75]'
+        style='color: color-mix(in srgb, var(--color-text) 70%, transparent);'
+      >
+        <a
+          href='https://www.fluxify.site'
+          target='_blank'
+          rel='noopener noreferrer'
+          class='text-(--color-accent) hover:underline'
+        >
+          Fluxify
+        </a> es mi negocio de desarrollo de software para pymes y startups:
+        hago sitios con cobro online, paneles internos y automatizaciones.
+      </p>
+    </div>
+
+    <div>
+      <p
+        class='text-xs uppercase tracking-[0.1em]'
+        style='color: color-mix(in srgb, var(--color-text) 50%, transparent);'
+      >
+        Formación
+      </p>
+      {
+        education.map((entry, i) => (
+          <div
+            class='py-5'
+            style={
+              i < education.length - 1
+                ? `background: linear-gradient(to right, transparent, color-mix(in srgb, var(--color-text) 8%, transparent) 48px, color-mix(in srgb, var(--color-text) 8%, transparent) calc(100% - 48px), transparent) no-repeat bottom / 100% 1px;`
+                : undefined
+            }
+          >
+            <p
+              class='text-xs'
+              style='color: color-mix(in srgb, var(--color-text) 50%, transparent);'
+            >
+              {entry.year}
+            </p>
+            <h4 class='mt-1 text-[17px]'>{entry.title}</h4>
+            <p
+              class='mt-1 text-[13px] leading-[1.6]'
+              style='color: color-mix(in srgb, var(--color-text) 70%, transparent);'
+            >
+              {entry.detail}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
